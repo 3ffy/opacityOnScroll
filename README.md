@@ -2,8 +2,7 @@ OpacityOnScroll
 ===============
 
 JQuery Plugin whose progessively reduce the opacity of an element relative to his scroll container / document.
-
-(element recently visible = opacity 100%, element half hidden = opacity 50%, etc. until opacity = 0%).
+(element at the top of the screen = opacity 100%, element half hidden = opacity 50%, etc. until opacity = 0%).
 
 Usage
 -----
@@ -56,11 +55,13 @@ The plugin can be paused/resumed for some specifics elements.
 
 ```javascript
 //pause
-$('article').attr('opacityOnScrollEnabled', false);
+$('article').opacityOnScroll(false);
 
 //resume
-$('article').attr('opacityOnScrollEnabled', true);
+$('article').opacityOnScroll(true);
 ```
+
+*NB: after a lot of brainfuck moments, i finally decided to don't provide a 'remove' method. The cost to keep references to events we have to destroy later is so huge that it seems ridiculous to do that for a behaviour almost never used. I rather prefer to keep the plugin fast, trustable and so minimal. If you find a nice way to achieve that feature, your help is welcome !*
 
 Licencing
 ---------
@@ -68,13 +69,4 @@ Licencing
 The library is under the Open Source Licence BSD3 as defined to the LICENCE file provided.
 In a nutshell this licence is one of the most permissive : you can use the library in your commercial project, modify it and redistributing it. The only constraint is to respect the author patent (one line comment is enought providing a link to the library repository and its licence file. Basically, you have to let the comment included inside the library).
 
-Troubleshooting
----------------
-The param 'container' actually don't works as it should. I'm working on it, so pls use the plugin only on the $(windows) scrollbars.
-
-TODO
-----
-- correct the bug above
-- unit store element in a plugin global array to use only one even attachement by container.
-- Refactor the pause/resume feature with 
-- Provide a method to completely 'detach' the plugin from the selector (and retrive native opacity?) + fire custom events.
+This code is made with love, please give it some love back ! 

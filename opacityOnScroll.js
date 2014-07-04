@@ -1,4 +1,4 @@
-/* OpacityOnScroll - version: 1.1 - author: 3ffy (Aurélien Gy) - aureliengy@gmail.com - http://www.aureliengy.com - licence: BSD 3-Clause Licence (@see licence file or https://raw.githubusercontent.com/3ffy/opacityOnScroll/master/LICENSE). */
+/* OpacityOnScroll - version: 2.0 - author: 3ffy (Aurélien Gy) - aureliengy@gmail.com - http://www.aureliengy.com - licence: BSD 3-Clause Licence (@see licence file or https://raw.githubusercontent.com/3ffy/opacityOnScroll/master/LICENSE). */
 (function($) {
 
     /**
@@ -25,6 +25,43 @@
      * @return {object} The jquery object involved into the plugin (the chain is not broken).
      */
     $.fn.opacityOnScroll = function(options) {
+        //determine wich action to do relative to the kind of parameter given
+        if (options === true) {
+            resume(this);
+        } else if (options === false) {
+            pause(this);
+        } else {
+            init(this, options);
+        }
+        //don't broke the jquery event chain
+        return this;
+    };
+
+    /**
+     * Pause the plugin behaviour for a specific JQuery object.
+     *
+     * @param {object} $context The JQuery object involved in that call to the plugin.
+     */
+    var pause = function($context) {
+        $context.attr('opacityOnScrollEnabled', false);
+    };
+
+    /**
+     * Unpause the plugin behaviour for a specific JQuery object.
+     *
+     * @param {object} $context The JQuery object involved in that call to the plugin.
+     */
+    var resume = function($context) {
+        $context.removeAttr('opacityOnScrollEnabled');
+    };
+
+    /**
+     * Init the plugin behaviour.
+     *
+     * @param {object} $context The JQuery object involved in that call to the plugin.
+     * @param {json}   options  The options given during the plugin call (cf. $.fn.opacityOnScroll).
+     */
+    var init = function($context, options) {
         //defaults settings
         var settings = $.extend({
             container: undefined,
@@ -55,12 +92,14 @@
             settings.container = $(window);
         }
         //attach each element to the window scroll event
-        return this.each(function() {
-            var that = this;
-            calculate(that, settings.container, settings.beginning, settings.end, settings.velocity);
+        $context.each(function() {
+            var $that = $context;
+            //initial tranformation (on page load)
+            calculate($that, settings.container, settings.beginning, settings.end, settings.velocity);
+            //attach event : each time the container vertical scroll is moved
             settings.container
-                .on('scroll', function() {
-                    calculate(that, settings.container, settings.beginning, settings.end, settings.velocity);
+                .on('scroll.opacityOnScroll', function() {
+                    calculate($that, settings.container, settings.beginning, settings.end, settings.velocity);
                 });
         });
     };
@@ -68,22 +107,21 @@
     /**
      * Caculate (and apply) the opacity of the element.
      *
-     * @param {string} context    The selector used to find the element to modify.
-     * @param {object} $container The jquery object representing the container of the element (this container need a scrollbar).
+     * @param {string} $context   The JQuery object representing the element ton modify.
+     * @param {object} $container The JQuery object representing the container of the element (this container need a scrollbar).
      * @param {int}    beginning  The offset of the first pixel to reach before start the opacity transformation.
      * @param {int}    end        The offset of the last pixel to reach before the element opacity = 0%. (if is not a valid number, the last vertical pixel of the element will be used).
      * @param {int}    velocity   Positive or negative user manual correction about the thresoldMax param (= speed / slow opacity process).
      */
-    var calculate = function(context, $container, beginning, end, velocity) {
-        $this = $(context);
-        var elemEnabled = $this.attr('opacityOnScrollEnabled');
+    var calculate = function($context, $container, beginning, end, velocity) {
+        var elemEnabled = $context.attr('opacityOnScrollEnabled');
         //check is the element is agreed to be modified by the plugin
-        if(typeof elemEnabled == 'undefined' || elemEnabled == true){
+        if (typeof elemEnabled == 'undefined' || elemEnabled == true) {
             var st = $container.scrollTop() - beginning;
             //if the beginning is not a valid number, use the bottom of the current element instead
             if (typeof end != 'number') {
-                end = $this.offset()
-                    .top + $this.outerHeight();
+                end = $context.offset()
+                    .top + $context.outerHeight();
             }
             //apply eventual user manual correction
             end -= velocity + beginning;
@@ -91,9 +129,9 @@
             if (st <= end) {
                 var opacity = (1 - st / end)
                     .toFixed(2);
-                $this.css('opacity', opacity);
+                $context.css('opacity', opacity);
             } else {
-                $this.css('opacity', 0);
+                $context.css('opacity', 0);
             }
         }
     };
