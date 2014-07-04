@@ -18,7 +18,7 @@ $(document).ready(function() {
 Working example
 ---------------
 
-<http://codepen.io/anon/pen/hsxzb>
+<http://codepen.io/3ffy/pen/FBLig>
 
 Options
 -------
