@@ -8,8 +8,12 @@ JQuery Plugin whose progessively reduce the opacity of an element relative to hi
 Usage
 -----
 
-```
-$('article').opacityOnScroll();
+```javascript
+$(document).ready(function() {
+
+    $('article').opacityOnScroll();
+
+});
 ```
 
 Working example
@@ -36,7 +40,7 @@ Options
     - {int} = The rapidity used to transform the element from opacity = 100% to opacity = 0%. (The number can be positive or negative). It's a convenient way to manually cheat with the other params.
 
     
-```
+```javascript
 $('article').opacityOnScroll({ 
     container: '#parent' //a parent div with a scroll bar (default = $(window)). Can use a jquery object too : $('#parent');
     beginning:250,
