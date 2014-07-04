@@ -1,8 +1,4 @@
-//TODO : pouvoir enabled / disabled chaque element à la volée
-//TODO : tester avec une sous div qui n'a pas de scrollbar
-//FIXME : n'a pas l'air de marcher si plusieurs elements dans le même selector $('.pleinsDeDiv').plugin(); :-(
-
-/* OpacityOnScroll - version: 1.0 - author: 3ffy (Aurélien Gy) - aureliengy@gmail.com - http://www.aureliengy.com - licence: BSD 3-Clause Licence (@see licence file or https://raw.githubusercontent.com/3ffy/opacityOnScroll/master/LICENSE). */
+/* OpacityOnScroll - version: 1.1 - author: 3ffy (Aurélien Gy) - aureliengy@gmail.com - http://www.aureliengy.com - licence: BSD 3-Clause Licence (@see licence file or https://raw.githubusercontent.com/3ffy/opacityOnScroll/master/LICENSE). */
 (function($) {
 
     /**
@@ -59,9 +55,8 @@
             settings.container = $(window);
         }
         //attach each element to the window scroll event
-        var that;
         return this.each(function() {
-            that = this;
+            var that = this;
             calculate(that, settings.container, settings.beginning, settings.end, settings.velocity);
             settings.container
                 .on('scroll', function() {
@@ -81,21 +76,25 @@
      */
     var calculate = function(context, $container, beginning, end, velocity) {
         $this = $(context);
-        var st = $container.scrollTop() - beginning;
-        //if the beginning is not a valid number, use the bottom of the current element instead
-        if (typeof end != 'number') {
-            end = $this.offset()
-                .top + $this.outerHeight();
-        }
-        //apply eventual user manual correction
-        end -= velocity + beginning;
-        //modify the opacity relative to the current document scrollbar position
-        if (st <= end) {
-            var opacity = (1 - st / end)
-                .toFixed(2);
-            $this.css('opacity', opacity);
-        } else {
-            $this.css('opacity', 0);
+        var elemEnabled = $this.attr('opacityOnScrollEnabled');
+        //check is the element is agreed to be modified by the plugin
+        if(typeof elemEnabled == 'undefined' || elemEnabled == true){
+            var st = $container.scrollTop() - beginning;
+            //if the beginning is not a valid number, use the bottom of the current element instead
+            if (typeof end != 'number') {
+                end = $this.offset()
+                    .top + $this.outerHeight();
+            }
+            //apply eventual user manual correction
+            end -= velocity + beginning;
+            //modify the opacity relative to the current document scrollbar position
+            if (st <= end) {
+                var opacity = (1 - st / end)
+                    .toFixed(2);
+                $this.css('opacity', opacity);
+            } else {
+                $this.css('opacity', 0);
+            }
         }
     };
 

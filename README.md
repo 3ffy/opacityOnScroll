@@ -49,8 +49,32 @@ $('article').opacityOnScroll({
 });
 ```
 
+Advanced Feature
+----------------
+
+The plugin can be paused/resumed for some specifics elements.
+
+```javascript
+//pause
+$('article').attr('opacityOnScrollEnabled', false);
+
+//resume
+$('article').attr('opacityOnScrollEnabled', true);
+```
+
 Licencing
 ---------
 
 The library is under the Open Source Licence BSD3 as defined to the LICENCE file provided.
 In a nutshell this licence is one of the most permissive : you can use the library in your commercial project, modify it and redistributing it. The only constraint is to respect the author patent (one line comment is enought providing a link to the library repository and its licence file. Basically, you have to let the comment included inside the library).
+
+Troubleshooting
+---------------
+The param 'container' actually don't works as it should. I'm working on it, so pls use the plugin only on the $(windows) scrollbars.
+
+TODO
+----
+- correct the bug above
+- unit store element in a plugin global array to use only one even attachement by container.
+- Refactor the pause/resume feature with 
+- Provide a method to completely 'detach' the plugin from the selector (and retrive native opacity?) + fire custom events.
