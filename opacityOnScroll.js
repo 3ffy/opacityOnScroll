@@ -1,5 +1,6 @@
 //TODO : pouvoir enabled / disabled chaque element à la volée
 //TODO : tester avec une sous div qui n'a pas de scrollbar
+//FIXME : n'a pas l'air de marcher si plusieurs elements dans le même selector $('.pleinsDeDiv').plugin(); :-(
 
 /* OpacityOnScroll - version: 1.0 - author: 3ffy (Aurélien Gy) - aureliengy@gmail.com - http://www.aureliengy.com - licence: BSD 3-Clause Licence (@see licence file or https://raw.githubusercontent.com/3ffy/opacityOnScroll/master/LICENSE). */
 (function($) {

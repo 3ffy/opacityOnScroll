@@ -19,7 +19,7 @@ $(document).ready(function() {
 Working example
 ---------------
 
-//TODO
+<http://codepen.io/anon/pen/hsxzb>
 
 Options
 -------
