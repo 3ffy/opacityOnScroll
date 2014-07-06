@@ -1,0 +1,150 @@
+<html>
+  <head>
+    <style>
+      body{
+        margin:0;
+      }
+
+      #content{
+        margin-top:50px;
+      }
+
+      .background-image {
+        top:50px;
+        left:0;
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        background-color:white;
+        z-index: -1;
+          background-image: url('http://placekitten.com/1576/1050');
+      }
+      header{
+        padding:10px;
+        background:#000;
+        position:fixed;
+        top:0;
+        width:100%;
+        height:30px;
+        color:#fff;
+        z-index: 1;
+        text-align:center;
+      }
+      header a{
+        text-decoration:none;
+        color:white;
+      }
+      #container-article{
+        display: block;
+        width:100%;
+        overflow:hidden;
+      }
+      #wrapper-article{
+        position:relative;
+        display:block;
+        width:1200px;
+        margin: 0 auto;
+        background-color: rgba(0,255,0,0.3);
+      }
+      article{
+        vertical-align:top;
+        background-color: rgba(0, 0, 0, 0.529412);
+        display:inline-block;
+        height:600px;
+        width:290px;
+        color:#fff;
+        margin-top: 85px;
+        margin-bottom: 200px;
+        margin-left: 25px;
+        margin-right: 25px;
+        padding:10px 20px;
+        font-size:20px;
+        font-family:arial;
+        line-height:30px;
+      }
+
+      section#posts
+      {
+        display:block;
+        width:100%;
+      }
+
+      section#posts h2{
+        margin:20px 10px 0;
+        padding: 0 40px 0 0;
+        cursor: pointer;
+        line-height: 45px;
+        height: 45px;
+        overflow-y: hidden;
+        color:black;
+      }
+
+      section#posts > .content{
+        height:1000px;
+        background-color:grey;
+        padding:30px;
+      }
+    </style>
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="../opacityOnScroll.min.js"></script>
+    <script>
+      $( document ).ready(function() {
+
+        //the only thing you need to do in your projects
+        $('#article1').opacityOnScroll();
+
+        //another example with using options
+        $('#article2').opacityOnScroll({ 
+          beginning:250,
+          velocity: 250
+        });
+
+      });
+    </script>
+  </head>
+  <body>
+    <div class="background-image"></div>
+
+    <header>
+      <a href="https://github.com/3ffy/opacityOnScroll">JQuery Plugin whose progessively reduce the opacity of an element relative to his scroll container / document.</a>
+    </header>
+
+    <div id="content">
+
+      <div id="container-article" class="">
+        <section id="wrapper-article">
+          <article id="article1">
+            <h2>My opacity will change !</h2>
+            <p>
+              Some text into the div using our plugin :
+              Note that is a complex css example to see the plugin in a real use case, don't be afraid !).
+            </p>
+            <img src="http://placekitten.com/290/300" />
+          </article>
+          <article id="article2">
+            <h2>My opacity will change !</h2>
+            <p>
+              But i use some specific options so i will start to disapear later but as my velocity is also bigger, i will do it faster.
+            </p>
+            <img src="http://placekitten.com/290/300" />
+          </article>
+          <article id="article3">
+            <h2>My opacity won't change !</h2>
+            <p>
+              Some text into the div.
+            </p>
+            <img src="http://placekitten.com/290/300" />
+          </article>
+        </section>
+      </div>
+
+      <section id="posts">
+        <h2>Other content</h2>
+        <div class="content">
+          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.
+        </div>
+      </section>
+
+    </div>
+  </body>
+</html>

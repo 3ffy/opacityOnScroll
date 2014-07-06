@@ -4,6 +4,8 @@ OpacityOnScroll
 JQuery Plugin whose progessively reduce the opacity of an element relative to his scroll container / document.
 (element at the top of the screen = opacity 100%, element half hidden = opacity 50%, etc. until opacity = 0%).
 
+It's a simple pluglin whose can be usefull to improve user experience on websites when a text element is above a background picture (less the text element is pertinent, more the background is visible).
+
 Usage
 -----
 
@@ -15,10 +17,12 @@ $(document).ready(function() {
 });
 ```
 
-Working example
----------------
+Working (live) example
+----------------------
 
-<http://codepen.io/3ffy/pen/FBLig>
+<http://codepen.io/3ffy/pen/Cfevh>
+
+*If for some reason the pen is broken, you can see a copy in the demo folder.*
 
 Options
 -------
