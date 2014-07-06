@@ -54,10 +54,10 @@ Advanced Feature
 The plugin can be paused/resumed for some specifics elements.
 
 ```javascript
-//pause
+//pause (opacity will still as it was before the pause)
 $('article').opacityOnScroll(false);
 
-//resume
+//resume (opacity will be recalculated)
 $('article').opacityOnScroll(true);
 ```
 

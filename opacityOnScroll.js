@@ -1,4 +1,4 @@
-/* OpacityOnScroll - version: 2.0 - author: 3ffy (Aurélien Gy) - aureliengy@gmail.com - http://www.aureliengy.com - licence: BSD 3-Clause Licence (@see licence file or https://raw.githubusercontent.com/3ffy/opacityOnScroll/master/LICENSE). */
+/* OpacityOnScroll - version: 2.1 - author: 3ffy (Aurélien Gy) - aureliengy@gmail.com - http://www.aureliengy.com - licence: BSD 3-Clause Licence (@see licence file or https://raw.githubusercontent.com/3ffy/opacityOnScroll/master/LICENSE). */
 (function($) {
 
     /**
@@ -43,7 +43,8 @@
      * @param {object} $context The JQuery object involved in that call to the plugin.
      */
     var pause = function($context) {
-        $context.attr('opacityOnScrollEnabled', false);
+        $context
+            .attr('opacityOnScrollEnabled', false);
     };
 
     /**
@@ -52,7 +53,12 @@
      * @param {object} $context The JQuery object involved in that call to the plugin.
      */
     var resume = function($context) {
-        $context.removeAttr('opacityOnScrollEnabled');
+        $context
+            .removeAttr('opacityOnScrollEnabled');
+        //force container to recalculate the 'new' opacity (bugfix responsive issues)
+        var $container = $context.data('opacityOnScrollContainer');
+        $container
+            .trigger('scroll.opacityOnScroll');
     };
 
     /**
@@ -94,6 +100,8 @@
         //attach each element to the window scroll event
         $context.each(function() {
             var $that = $context;
+            //store reference to the container on the current element
+            $that.data('opacityOnScrollContainer', settings.container);
             //initial tranformation (on page load)
             calculate($that, settings.container, settings.beginning, settings.end, settings.velocity);
             //attach event : each time the container vertical scroll is moved
